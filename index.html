@@ -3,16 +3,162 @@
 <head>
 <meta charset="utf-8">
 <title>Jogo da Forca JS</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+	:root {
+		color-scheme: light;
+		--bg-1: #0f172a;
+		--bg-2: #1e293b;
+		--card: rgba(15, 23, 42, 0.78);
+		--text: #e2e8f0;
+		--muted: #94a3b8;
+		--accent: #38bdf8;
+		--accent-strong: #0ea5e9;
+		--danger: #f87171;
+		--border: rgba(148, 163, 184, 0.22);
+	}
+
+	* {
+		box-sizing: border-box;
+	}
+
+	body {
+		margin: 0;
+		min-height: 100vh;
+		display: grid;
+		place-items: center;
+		font-family: Arial, Helvetica, sans-serif;
+		color: var(--text);
+		background:
+			radial-gradient(circle at top, rgba(56, 189, 248, 0.2), transparent 36%),
+			linear-gradient(135deg, var(--bg-1), var(--bg-2));
+		padding: 24px;
+	}
+
+	.card {
+		width: min(100%, 480px);
+		padding: 32px;
+		border: 1px solid var(--border);
+		border-radius: 24px;
+		background: var(--card);
+		box-shadow: 0 24px 70px rgba(0, 0, 0, 0.35);
+		backdrop-filter: blur(10px);
+	}
+
+	h1 {
+		margin: 0 0 16px;
+		font-size: 2rem;
+		line-height: 1.1;
+		letter-spacing: -0.03em;
+	}
+
+	p {
+		margin: 0 0 14px;
+	}
+
+	#palavra {
+		min-height: 48px;
+		padding: 16px;
+		border-radius: 16px;
+		background: rgba(255, 255, 255, 0.06);
+		border: 1px solid var(--border);
+		font-size: 1.55rem;
+		font-weight: 700;
+		letter-spacing: 0.2em;
+		text-align: center;
+		text-transform: uppercase;
+	}
+
+	#erros {
+		color: var(--muted);
+		font-size: 0.95rem;
+	}
+
+	.controls {
+		display: grid;
+		grid-template-columns: 1fr auto auto;
+		gap: 10px;
+		margin-top: 18px;
+	}
+
+	input[type="text"] {
+		width: 100%;
+		padding: 14px 16px;
+		border: 1px solid var(--border);
+		border-radius: 14px;
+		background: rgba(255, 255, 255, 0.08);
+		color: var(--text);
+		font-size: 1rem;
+		outline: none;
+	}
+
+	input[type="text"]::placeholder {
+		color: var(--muted);
+	}
+
+	input[type="text"]:focus {
+		border-color: rgba(56, 189, 248, 0.8);
+		box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.18);
+	}
+
+	button {
+		padding: 14px 16px;
+		border: 0;
+		border-radius: 14px;
+		font-weight: 700;
+		cursor: pointer;
+		transition: transform 0.15s ease, background 0.15s ease, opacity 0.15s ease;
+	}
+
+	button:hover {
+		transform: translateY(-1px);
+	}
+
+	button:active {
+		transform: translateY(0);
+		opacity: 0.92;
+	}
+
+	button:first-of-type {
+		background: linear-gradient(135deg, var(--accent), var(--accent-strong));
+		color: #fff;
+	}
+
+	button:last-of-type {
+		background: rgba(255, 255, 255, 0.08);
+		color: var(--text);
+		border: 1px solid var(--border);
+	}
+
+	@media (max-width: 520px) {
+		.card {
+			padding: 22px;
+		}
+
+		.controls {
+			grid-template-columns: 1fr;
+		}
+
+		button {
+			width: 100%;
+		}
+	}
+</style>
 </head>
 <body>
-<h1>Jogo da Forca (JavaScript)</h1>
 
-<p id="palavra"></p>
-<p id="erros"></p>
+<main class="card">
+	<h1>Jogo da Forca</h1>
 
-<input type="text" id="letra" maxlength="1">
-<button onclick="jogar()">Tentar</button>
-<button onclick="location.reload()">Reiniciar</button>
+	<p id="palavra"></p>
+	<p id="erros"></p>
+
+	<div class="controls">
+		<input type="text" id="letra" maxlength="1" placeholder="Digite uma letra" autofocus>
+		<button onclick="jogar()">Tentar</button>
+		<button onclick="location.reload()">Reiniciar</button>
+	</div>
+</main>
 
 <script src="script.js"></script>
 </body>
