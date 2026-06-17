@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Jogo da Forca JS</title>
+</head>
+<body>
+<h1>Jogo da Forca (JavaScript)</h1>
+
+<p id="palavra"></p>
+<p id="erros"></p>
+
+<input type="text" id="letra" maxlength="1">
+<button onclick="jogar()">Tentar</button>
+<button onclick="location.reload()">Reiniciar</button>
+
+<script>
+const palavras = ["banana","computador","internet","javascript","programacao"];
+const palavra = palavras[Math.floor(Math.random() * palavras.length)];
+let letras = [];
+let erros = 0;
+
+function atualizar() {
+    let texto = "";
+    let venceu = true;
+
+    for (let c of palavra) {
+        if (letras.includes(c)) {
+            texto += c + " ";
+        } else {
+            texto += "_ ";
+            venceu = false;
+        }
+    }
+
+    document.getElementById("palavra").innerText = texto;
+    document.getElementById("erros").innerText = "Erros: " + erros + "/6";
+
+    if (venceu) alert("Você venceu!");
+    if (erros >= 6) alert("Você perdeu! Palavra: " + palavra);
+}
+
+function jogar() {
+    const letra = document.getElementById("letra").value.toLowerCase();
+    document.getElementById("letra").value = "";
+
+    if (!letras.includes(letra)) {
+        letras.push(letra);
+        if (!palavra.includes(letra)) erros++;
+    }
+
+    atualizar();
+}
+
+atualizar();
+</script>
+</body>
+</html>
